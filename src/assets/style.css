@@ -1,0 +1,202 @@
+body{
+    background-color: #c6ffff;
+}
+p{
+    text-align: justify;
+}
+#img-logo{
+    height: auto;
+    width: 100px;
+    object-fit: contain;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    opacity: 1;
+}
+#view-section #img-logo{
+    width: 150px;
+    position: static !important;
+    margin: 30px auto;
+    display: block;
+
+}
+/*element*/
+.element{
+    position: absolute;
+    z-index: 2;
+}
+.nodes{
+    display: grid;
+    grid-template-columns: repeat(2,50px);
+    text-align: center;
+    border: 2px solid black;
+    width: 100px;
+    transform: rotate(45deg);
+    overflow: hidden;
+    cursor: pointer;
+    background-color: white;
+    user-select: none;
+
+}
+.node{
+    height: 50px;
+    display: flex;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    transition: all 0.2s ease;
+}
+.element:hover .node , .element:hover .tools{
+    opacity: 1;
+}
+/*node of element*/
+.node:hover, .node:focus{
+    background-color: #ababab;
+    padding: 1px;
+}
+.node span{
+    transform: rotate(-45deg);
+}
+.element  .node:nth-child(3){
+    order: 4;
+}
+.element  .node:nth-child(4){
+    order: 3;
+}
+/*tools*/
+.tools{
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    gap: 0.25rem;
+    margin-top: 20px;
+}
+
+/*link*/
+.links{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+path{
+    stroke-linecap: round;
+    z-index: -1;
+    cursor: pointer;
+}
+path.selected{
+    stroke-dasharray: 20;
+    stroke: red;
+    animation: selectingLink 0.5s linear infinite;
+}
+@keyframes selectingLink{
+    100%{
+        stroke-dashoffset: -40;
+    }
+}
+/*linkingNode for dragging*/
+.linkingNode{
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    cursor: none;
+}
+
+/*view section*/
+#view-section{
+    height: 100vh;
+    overflow: hidden;
+}
+#side-nav-container{
+    z-index: 2;
+
+}
+#side-nav-container > :first-child{
+    margin-top: 180px;
+}
+#controls{
+    margin-top: 50px;
+}
+.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+}
+#controls > div{
+    position: relative;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    border-radius: 0.25rem;
+    margin: 0 auto;
+    color: white;
+    align-items: center;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+#controls > div::after{
+    content:'';
+    position: absolute;
+    height: 40px;
+    width: 2px;
+    background-color: white;
+    left: 40%;
+}
+#slide{
+    z-index: 1;
+}
+.map{
+    width: 302px;
+    padding-bottom: 56.25%;
+    border: #333 solid 1px;
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+    margin: 20px auto;
+}
+.map-layout{
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    transform-origin: 0 0;
+    transform: scale(calc(300 / 1920));
+    left: 0;
+    top: 0;
+}
+.element.viewed .nodes {
+    background: #5050fc;
+}
+.element.viewed .node {
+    opacity: 0;
+}
+.wrapper{
+    overflow: hidden;
+    width: 75%;
+}
+/*slide transitions*/
+.slide-active{
+    transition: all 0.7s ;
+}
+.slide-center-enter-from{
+    transform: scale(0);
+}
+.slide-up-enter-from,.slide-down-leave-to{
+    transform: translateY(-100%);
+}
+.slide-up-leave-to,.slide-down-enter-from{
+    transform: translateY(100%);
+}
+.slide-right-enter-from,.slide-left-leave-to{
+     transform: translateX(100%);
+ }
+.slide-right-leave-to,.slide-left-enter-from{
+    transform: translateX(-100%);
+}
